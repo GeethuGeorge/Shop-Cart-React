@@ -1,0 +1,107 @@
+to open a project in same folder ->"  npx create-react-app .  "
+in React we can follow any styling
+In this we are using SCSS
+
+to work scss in react, we need to install an additional packages
+in react we should install in react via npm
+commabd
+-->npm install sass
+------------------------------------------------------
+
+//How to kill the exiting local server process---Ctrl + C
+then add the package
+then npm start
+
+//how do we know if package is install or not--check package.json---we can see  "sass": "^1.62.0",
+
+//scss is a superset, behind the scene project will convert scss to css and inject to our app
+
+scss wont run in browser
+
+
+we dont want to import style sheet on each compoenent , coz index.scss is a global
+or we can create seperate style sheet for each component
+-------------------------------------------------------
+we can add mutliple terminals
+--1 to add pacakages
+--1---for running the program--dev server
+Press + near terminal
+Both point to same folder
+
+----------------------------------------------------------
+
+we have 5 compoenent
+1.header
+2.Main
+3.ProductGallery
+4.ProductItem
+5. Footer
+
+//we need to pass the data in objects in app.js towards the mast component via props drilling
+//route is appwrapper--> main--> ProductGallery-->ProductItem
+But the products we passed from App.js is not used in productGallery , it is to be wanted only on product item component
+//when we finally pass to the component where we gona use can be applied with destructuring ,or spread etc other wise transfer values as such
+// products={products} --->propname and data
+
+//once it reached the productGallery the data is "array of objects"
+//we need to split and pass to product item 
+//until now we got it as array , but how to access the same in product item---->as single object
+//we need each object in the array as each product Item in the productItem component
+//ie each product each object in the the array of objects, so need to split and taken we can send objects and talen by spliting and taling each otem in object
+----------------------------------------------------------
+
+  const[product1,product2, product3]=products
+
+//but instead of using the below 
+
+       <ProductItem productData={product1}/>
+       <ProductItem productData={product2}/>
+       <ProductItem productData={product3}/>
+  
+//we can use it the below using spread operator and pass it to ProductItem
+        <ProductItem {...product1}
+       <ProductItem {...product2}/>
+       <ProductItem {...product3}/>
+
+       //while receiving them in productItem  --function ProductItem({id, name, price}) {
+--------------------------------------------------------------------
+
+but since we have many products in each session , it tough to add each item by calling component many times we can use map function to loop around each item in array and spread the object in each component productItem
+//since map is a JS expression add  {}
+//loop through each object in array 
+
+    {
+      products.map((product)=>{
+        return <ProductItem {...product}/>
+      })
+    }
+
+
+
+for photos--https://picsum.photos/id/${id}/600/400 
+//we can change id and it will give you different images like an API
+    -----------------------------------------------------------------------
+ **** Warning: Each child in a list should have a unique "key" p
+
+ 
+ //not erro better practise
+
+
+ //when we render a list of item we get an warning to add key
+ //key is a special prop
+ //now we have passed id name price as prop//but this is repeating 6 times header
+ //2 dom actaul and virtual
+ //when it render in virtual DOM it need  a unique prop for react to identify
+ //when we pass the array, anbd if any changes, component will rerender each times
+ //for eg when we remove a data, one component is gone for exiting
+ //react will identify each component with  a unique key
+ //ie eeach key should be unique
+ //react will understand each component by this prop key 
+ //whenevern a change , need rerender , not to render based on the key
+//<ProductItem key={product.id} {...product}/> 
+//a unique value of each element like id and avoid using index as key
+-------------------------------------------------------------------------
+
+Interactivity
+-----------------------------------------------------------
+
